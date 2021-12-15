@@ -22,10 +22,23 @@ Traveller.prototype.calculateTotalDistanceTravelled = function () {
   return this.journeys.reduce((totalDistance, journey) => totalDistance + journey.distance, 0);
 };
 
+// Uses set and test edited
 Traveller.prototype.getUniqueModesOfTransport = function () {
   const transportArr  = this.journeys.map((journey) => journey.transport);
   return new Set(transportArr);
 };
+
+Traveller.prototype.getUniqueModesOfTransport = function () {
+  const filteredTransport = [];
+  this.journeys.forEach((journey) => {
+    if (!filteredTransport.includes(journey.transport)){
+      filteredTransport.push(journey.transport);
+    }
+  });
+  return filteredTransport;
+};
+
+
 
 
 
