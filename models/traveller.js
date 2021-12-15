@@ -22,24 +22,31 @@ Traveller.prototype.calculateTotalDistanceTravelled = function () {
   return this.journeys.reduce((totalDistance, journey) => totalDistance + journey.distance, 0);
 };
 
-// Uses set and test edited
-Traveller.prototype.getUniqueModesOfTransport = function () {
-  const transportArr  = this.journeys.map((journey) => journey.transport);
-  return new Set(transportArr);
-};
+// Initial attempt, but uses a set and requires test to be edited
+
+// Traveller.prototype.getUniqueModesOfTransport = function () {
+//   const transportArr  = this.journeys.map((journey) => journey.transport);
+//   return new Set(transportArr);
+// };
+
+// Second attempt, works but uses foreach()
+
+// Traveller.prototype.getUniqueModesOfTransport = function () {
+//   const filteredTransport = [];
+//   this.journeys.forEach((journey) => {
+//     if (!filteredTransport.includes(journey.transport)){
+//       filteredTransport.push(journey.transport);
+//     }
+//   });
+//   return filteredTransport;
+// };
+
+// Third attempt refactors above, but found with help of Stack Overflow!
 
 Traveller.prototype.getUniqueModesOfTransport = function () {
-  const filteredTransport = [];
-  this.journeys.forEach((journey) => {
-    if (!filteredTransport.includes(journey.transport)){
-      filteredTransport.push(journey.transport);
-    }
-  });
-  return filteredTransport;
+  const transportTypes = this.journeys.map((journey) => journey.transport);
+  return transportTypes.filter((transport, pos) => transportTypes.indexOf(transport) === pos);
 };
-
-
-
 
 
 
